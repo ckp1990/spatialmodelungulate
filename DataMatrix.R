@@ -43,14 +43,21 @@ nwalks=nwalks2[-subsetlist]
 ntrans=length(nwalks)
 ndistwalk=tottrlen[-subsetlist]
 ### Generate adjacency matrix ###
-poly <- maptools:::Map2poly(modelgrid)
+poly <- modelgrid$att.data#maptools:::Map2poly(modelgrid)
 adjmatrix=poly2nb(modelpoly)
 ### Scaling and centering of landscape level covariates ###
-cov1km=modelgrid$att.data
-cov1km$LineID=1:length(modelpoly)
-cov1km[names(cov1km) %in% sb2] <- lapply(cov1km[,names(cov1km) %in% sb2], function(x) c(scale(x)))
+cov1km=poly
+cov1km <- cov1km %>% as.data.frame() ##new 
+#cov1km$LineID=1:length(modelpoly)
+## Brut force code to turn PCHSCR into NUM
+#cov1km$PCHSCR<-as.numeric(cov1km$PCHSCR)
+## Brut force code to scale the data
+
+cov1km[names(cov1km) %in% sb2] <- lapply(cov1km[names(cov1km) %in% sb2], 
+                                         function(x) c(scale(x)))
 ### Scaling and centering of transect level covariates ###
 covsites1<-covsites[c(names(covsites) %in% sb1)]
+
 covsites1[names(covsites1) %in% sb1] <- lapply(covsites1[,names(covsites1) %in% sb1], function(x) c(scale(x)))
 covsites1$tr.no<-covsites$tr.no
 covsites=covsites1
@@ -75,7 +82,7 @@ newTR[,5]=pmatch(newTR[ ,2], cov1km$NUMMER, duplicates=TRUE)
 b=newTR[,5]=='NA'
 c=which(b=="FALSE")
 newTR[-c,5]=1
-uqid=1:as.numeric(uqid)
+uqid=1:uqid
 bigM=matrix(0, ncol=as.numeric(igrid), nrow=length(uqid))
 bigM=as.data.frame(bigM)
 for (i in 1:length(uqid)){
@@ -106,3 +113,4 @@ for(i in 2:6){
   a=which(bigM2[,i] == 0)
   bigM2[a,i]=1
 }
+

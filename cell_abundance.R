@@ -42,6 +42,7 @@ dev.off()
 pdf(paste0(sps,'medianZ_map_',format(Sys.Date(), "%d%b%Y"),".pdf"))
 print(spplot(modelpoly,zcol=9, main = paste(sps,'median abundance'),col = "transparent"))
 dev.off()
+## require change in code. 
 writeOGR(modelpoly, dsn=getwd(), layer=paste0(sps,'Zs_map_',format(Sys.Date(), "%d%b%Y")),
          driver="ESRI Shapefile", overwrite_layer=T)
 ### Compute abundance at site level ###
