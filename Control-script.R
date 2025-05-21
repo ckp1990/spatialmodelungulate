@@ -16,13 +16,13 @@ library(matrixStats)
 sps='SBR'
 ### Specify input files ###
 # line transect data file; see Appendix 1 for data structure #
-dstf<-'NSK_Data/nhb.csv'
+dstf<-'Data/nhb.csv'
 # transect details file; see Appendix 1 for data structure #
-trf<-'NSK_Data/TRidentity.csv'
+trf<-'Data/TRidentity.csv'
 # Shape files with landscape level covariates; see Appendix 1 for data structure #
-shp<-'NSK_Data/cov1km.shp'
+shp<-'Data/cov1km.shp'
 # transect level covariates; see Appendix 1 for data structure #
-trcov<-'NSK_Data/TRsbrcovariates1.csv'
+trcov<-'Data/TRsbrcovariates1.csv'
 
 ### Specify values for estimating detection function ###
 distcatsize=20; # distance category size; 15 to 20 categories are ideal#
@@ -95,7 +95,7 @@ assign(paste0(sps,"UP"),nimbleMCMC(
   nburnin = 10000,
   summary=T,
   thin = 1))
-print(Sys.time()-t1) 3
+print(Sys.time()-t1)
 ### save objects as a backup to avoid any loss ###
 ### comment this if you want to save read/write time ###
 save.image()

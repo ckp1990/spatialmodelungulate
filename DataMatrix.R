@@ -5,7 +5,7 @@
 x2=read.table(paste0(dstf),header=TRUE,sep=',') # line transect file
 TRid=read.csv(paste0(trf)) # transect ID
 modelgrid=maptools:::read.shape(paste0(shp)) # shape file with grids
-modelpoly=readShapePoly(paste0(shp)) # shape file with grids
+modelpoly=sf::st_read(paste0(shp)) # shape file with grids
 covsites=read.csv(paste0(trcov))
 ### Subset distance data for species that is being analyzed ###
 x=subset(x2,x2$walk.no!='NA')
