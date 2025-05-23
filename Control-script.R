@@ -91,8 +91,8 @@ assign(paste0(sps,"UP"),nimbleMCMC(
   constants = const,
   inits = inits,
   monitors = parameters,
-  niter = 100000,
-  nburnin = 10000,
+  niter = 220000,
+  nburnin = 20000,
   summary=T,
   thin = 1))
 print(Sys.time()-t1)
@@ -103,7 +103,7 @@ save.image()
 ## check object ‘grszBreaks’ to determine which ‘groupsizes’ should be plotted ##
 ## uncomment lines in 'posteriorSummariesWITHdetectionPlot.R' if you are using the model WITH indicator variables ##
 grszSeq = seq(1:length(grszBreaks))
-source('posteriorSummariesWITHdetectionPlot.R')
+source('D:/spatialmodelungulate-MTL/posteriorSummariesWITHdetectionPlot.R')
 ## Compute local, site-level and landscape-level abundances and generate density surface map ##
 ## Update lines 6-7 in the 'cell_abundance.R' script depending on the number of covariates used in the analysis ##
 source('cell_abundance.R')
